@@ -1,4 +1,6 @@
+import { AnimationGroupPlayer } from '@angular/animations/src/players/animation_group_player';
 import { Component, OnInit } from '@angular/core';
+import { stringify } from '@angular/core/src/util';
 
 @Component({
   selector: 'app-crew',
@@ -20,7 +22,16 @@ export class CrewComponent implements OnInit {
   }
 
   add(memberName: string, isFirst: boolean) {
-    this.crew.push({name: memberName, firstMission: isFirst});
+    let newMember = {name: memberName};
+    let sameName : string;
+    for (let i=0; i<this.crew.length; i++){
+      if (this.crew[i]['name'] === newMember.name){
+        sameName = "same";
+      }
+    }
+    if (sameName !== "same"){
+      this.crew.push({name: memberName, firstMission: isFirst});
+    }
   }
 
   remove(member: object) {
